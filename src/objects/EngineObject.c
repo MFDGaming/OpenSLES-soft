@@ -25,7 +25,7 @@ extern "C" {
 #endif
 
 #include "EngineObject.h"
-#include "./interfaces/EngineInterface.h"
+#include "../interfaces/EngineInterface.h"
 
 SLresult engineObjectRealize(Object_t *object, SLboolean async) {
     SLresult result = engineInterfaceCreate((EngineInterface_t **)&object->extraData);

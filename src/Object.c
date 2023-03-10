@@ -68,21 +68,21 @@ SLresult objectCreate(InternalObjectID_t objectID, Object_t **object) {
 
 SLresult objectRealize(SLObjectItf self, SLboolean async) {
     puts("objectRealize");
-    struct ObjectEntry *current_object = objects;
-    while (current_object != NULL) {
-        if (self == (SLObjectItf)&current_object->object.self) {
-            if (current_object->object.internalObjectID == IOID_ENGINE) {
-                engineObjectRealize(&current_object->object, async);
+    struct ObjectEntry *currentObject = objects;
+    while (currentObject != NULL) {
+        if (self == (SLObjectItf)&currentObject->object.self) {
+            if (currentObject->object.internalObjectID == IOID_ENGINE) {
+                engineObjectRealize(&currentObject->object, async);
             }
-            for (SLint32 i = 0; i < current_object->object.numInterfaces; ++i) {
-                if (current_object->object.interfaceIDs[i] == SL_IID_VOLUME) {
+            for (SLint32 i = 0; i < currentObject->object.numInterfaces; ++i) {
+                if (currentObject->object.interfaceIDs[i] == SL_IID_VOLUME) {
 
-                } else if (current_object->object.interfaceIDs[i] == SL_IID_BUFFERQUEUE) {
+                } else if (currentObject->object.interfaceIDs[i] == SL_IID_BUFFERQUEUE) {
 
                 } 
             }
         }
-        current_object = current_object->next;
+        currentObject = currentObject->next;
     }
     return SL_RESULT_SUCCESS;
 }
@@ -99,21 +99,21 @@ SLresult objectGetState(SLObjectItf self, SLuint32 *pState) {
 
 SLresult objectGetInterface(SLObjectItf self, const SLInterfaceID iid, void *pInterface) {
     puts("objectGetInterface");
-    struct ObjectEntry *current_object = objects;
-    while (current_object != NULL) {
-        if (self == (SLObjectItf)&current_object->object.self) {
-            if (current_object->object.internalObjectID == IOID_ENGINE) {
-                engineObjectInterface(&current_object->object, iid, pInterface);
+    struct ObjectEntry *currentObject = objects;
+    while (currentObject != NULL) {
+        if (self == (SLObjectItf)&currentObject->object.self) {
+            if (currentObject->object.internalObjectID == IOID_ENGINE) {
+                engineObjectInterface(&currentObject->object, iid, pInterface);
             }
-            for (SLint32 i = 0; i < current_object->object.numInterfaces; ++i) {
-                if (current_object->object.interfaceIDs[i] == SL_IID_VOLUME) {
+            for (SLint32 i = 0; i < currentObject->object.numInterfaces; ++i) {
+                if (currentObject->object.interfaceIDs[i] == SL_IID_VOLUME) {
 
-                } else if (current_object->object.interfaceIDs[i] == SL_IID_BUFFERQUEUE) {
+                } else if (currentObject->object.interfaceIDs[i] == SL_IID_BUFFERQUEUE) {
                     
                 } 
             }
         }
-        current_object = current_object->next;
+        currentObject = currentObject->next;
     }
     return SL_RESULT_SUCCESS;
 }
