@@ -29,12 +29,12 @@ extern "C" {
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
-#include "Object.h"
+#include "./interfaces/ObjectInterface.h"
 
 SLresult SLAPIENTRY slCreateEngine(SLObjectItf *pEngine, SLuint32 numOptions, const SLEngineOption *pEngineOptions, SLuint32 numInterfaces, const SLInterfaceID *pInterfaceIds, const SLboolean *pInterfaceRequired) {
     puts("slCreateEngine");
-    Object_t *engineObject;
-    SLresult result = objectCreate(IOID_ENGINE, &engineObject);
+    ObjectInterface_t *engineObject;
+    SLresult result = objectInterfaceCreate(IOID_ENGINE, &engineObject);
     if (result != SL_RESULT_SUCCESS) {
         *pEngine = NULL;
         return result;

@@ -25,6 +25,7 @@ extern "C" {
 #endif
 
 #include "VolumeInterface.h"
+#include <stdlib.h>
 
 struct SLVolumeItf_ volumeInterfaceFuncArray = {
     volumeInterfaceSetVolumeLevel,

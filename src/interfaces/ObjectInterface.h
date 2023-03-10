@@ -27,56 +27,56 @@
 extern "C" {
 #endif
 
-#include "OpenSLES.h"
+#include "../OpenSLES.h"
 #include <pthread.h>
 
 typedef enum {
     IOID_ENGINE,
     IOID_AUDIOPLAYER,
     IOID_OUTPUTMIX
-} InternalObjectID_t;
+} InternalObjectInterfaceID_t;
 
 typedef struct {
     struct SLObjectItf_ *self;
-    InternalObjectID_t internalObjectID;
+    InternalObjectInterfaceID_t internalObjectID;
     SLInterfaceID *interfaceIDs;
     SLint16 numInterfaces;
     void **interfaces;
     void *extraData;
-} Object_t;
+} ObjectInterface_t;
 
-struct ObjectEntry {
-    Object_t object;
-    struct ObjectEntry *next;
+struct ObjectInterfaceEntry {
+    ObjectInterface_t interface;
+    struct ObjectInterfaceEntry *next;
 };
 
-extern struct SLObjectItf_ objectFuncArray;
+extern struct SLObjectItf_ objectInterfaceFuncArray;
 
-extern struct ObjectEntry *objects;
+extern struct ObjectInterfaceEntry *objectInterfaces;
 
-extern pthread_mutex_t objectsLock;
+extern pthread_mutex_t objectInterfacesLock;
 
-SLresult objectCreate(InternalObjectID_t objectID, Object_t **object);
+SLresult objectInterfaceCreate(InternalObjectInterfaceID_t objectID, ObjectInterface_t **interface);
 
-SLresult objectRealize(SLObjectItf self, SLboolean async);
+SLresult objectInterfaceRealize(SLObjectItf self, SLboolean async);
 
-SLresult objectResume(SLObjectItf self, SLboolean async);
+SLresult objectInterfaceResume(SLObjectItf self, SLboolean async);
 
-SLresult objectGetState(SLObjectItf self, SLuint32 *pState);
+SLresult objectInterfaceGetState(SLObjectItf self, SLuint32 *pState);
 
-SLresult objectGetInterface(SLObjectItf self, const SLInterfaceID iid, void *pInterface);
+SLresult objectInterfaceGetInterface(SLObjectItf self, const SLInterfaceID iid, void *pInterface);
 
-SLresult objectRegisterCallback(SLObjectItf self, slObjectCallback callback, void *pContext);
+SLresult objectInterfaceRegisterCallback(SLObjectItf self, slObjectCallback callback, void *pContext);
 
-void objectAbortAsyncOperation(SLObjectItf self);
+void objectInterfaceAbortAsyncOperation(SLObjectItf self);
 
-void objectDestroy(SLObjectItf self);
+void objectInterfaceDestroy(SLObjectItf self);
 
-SLresult objectSetPriority(SLObjectItf self, SLint32 priority, SLboolean preemptable);
+SLresult objectInterfaceSetPriority(SLObjectItf self, SLint32 priority, SLboolean preemptable);
 
-SLresult objectGetPriority(SLObjectItf self, SLint32 *pPriority, SLboolean *pPreemptable);
+SLresult objectInterfaceGetPriority(SLObjectItf self, SLint32 *pPriority, SLboolean *pPreemptable);
 
-SLresult objectSetLossOfControlInterfaces(SLObjectItf self, SLint16 numInterfaces, SLInterfaceID *pInterfaceIDs, SLboolean enabled);
+SLresult objectInterfaceSetLossOfControlInterfaces(SLObjectItf self, SLint16 numInterfaces, SLInterfaceID *pInterfaceIDs, SLboolean enabled);
 
 #ifdef __cplusplus
 }

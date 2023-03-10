@@ -27,7 +27,7 @@ extern "C" {
 #include "EngineObject.h"
 #include "../interfaces/EngineInterface.h"
 
-SLresult engineObjectRealize(Object_t *object, SLboolean async) {
+SLresult engineObjectRealize(ObjectInterface_t *object, SLboolean async) {
     SLresult result = engineInterfaceCreate((EngineInterface_t **)&object->extraData);
     if (result != SL_RESULT_SUCCESS) {
         return result;
@@ -35,7 +35,7 @@ SLresult engineObjectRealize(Object_t *object, SLboolean async) {
     return SL_RESULT_SUCCESS;
 }
 
-SLresult engineObjectInterface(Object_t *object, const SLInterfaceID iid, void *pInterface) {
+SLresult engineObjectInterface(ObjectInterface_t *object, const SLInterfaceID iid, void *pInterface) {
     if (iid == SL_IID_ENGINE) {
         *(SLEngineItf *)pInterface = (SLEngineItf)&((EngineInterface_t *)object->extraData)->self;
     }

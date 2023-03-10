@@ -27,16 +27,16 @@
 extern "C" {
 #endif
 
-#include "../Object.h"
+#include "../interfaces/ObjectInterface.h"
 #include "../interfaces/EngineInterface.h"
 
 typedef struct {
     EngineInterface_t *engineInterface;
 } EngineObjectExtraData_t;
 
-SLresult engineObjectRealize(Object_t *object, SLboolean async);
+SLresult engineObjectRealize(ObjectInterface_t *object, SLboolean async);
 
-SLresult engineObjectInterface(Object_t *object, const SLInterfaceID iid, void *pInterface);
+SLresult engineObjectInterface(ObjectInterface_t *object, const SLInterfaceID iid, void *pInterface);
 
 #ifdef __cplusplus
 }
